@@ -8,6 +8,9 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
 
+// // backend test
+// fetch('http://127.0.0.1:3000/pk/getBotInfo/').then(res => res.text())
+
 const { t } = useI18n()
 </script>
 
@@ -52,6 +55,15 @@ const { t } = useI18n()
       >
         {{ t('button.go') }}
       </button>
+    </div>
+
+    <div>
+      <RouterLink
+        btn m-3 text-sm
+        to="/pk"
+      >
+        {{ t('button.go') }}
+      </RouterLink>
     </div>
   </div>
 </template>
