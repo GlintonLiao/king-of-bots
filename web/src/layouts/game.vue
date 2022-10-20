@@ -7,3 +7,9 @@
     </div>
   </main>
 </template>
+
+<style>
+/* * {
+  outline: 1px solid limegreen;
+} */
+</style>
