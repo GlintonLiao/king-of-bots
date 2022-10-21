@@ -11,6 +11,6 @@ onMounted(() => {
 
 <template>
   <div ref="parent" class="gamemap w-full h-full flex justify-center">
-    <canvas ref="canvas" />
+    <canvas ref="canvas" tabindex="1" />
   </div>
 </template>

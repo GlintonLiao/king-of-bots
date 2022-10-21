@@ -1,4 +1,5 @@
-import { DX, DY, GameObject, Wall } from '../gameplay'
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { Cell, DX, DY, GameObject, Snake, Wall } from '../gameplay'
 
 export class GameMap extends GameObject {
   // attributes
@@ -8,7 +9,8 @@ export class GameMap extends GameObject {
   rows: number
   cols: number
   innerWallsCount: number
-  wall: Wall[]
+  walls: Wall[]
+  snakes: Snake[]
 
   constructor(ctx: CanvasRenderingContext2D, parent: HTMLDivElement) {
     super()
@@ -18,18 +20,31 @@ export class GameMap extends GameObject {
     this.len = 0
 
     this.rows = 13
-    this.cols = 13
+    this.cols = 14 // prevents two snakes run into same block at same time
 
     this.innerWallsCount = 20
-    this.wall = []
+    this.walls = []
+
+    this.snakes = [
+      new Snake({
+        id: 0,
+        color: '#4876ec',
+        r: this.rows - 2,
+        c: 1,
+      }, this),
+      new Snake({
+        id: 1,
+        color: '#F94848',
+        r: 1,
+        c: this.cols - 2,
+      }, this),
+    ]
   }
 
   isConnected(grid: boolean[][], x: number, y: number, targetX: number, targetY: number): boolean {
-    if (x === targetX && y === targetY)
-      return true
+    if (x === targetX && y === targetY) return true
 
     grid[x][y] = true
-
     for (let i = 0; i < 4; i++) {
       const xx = x + DX[i]
       const yy = y + DY[i]
@@ -61,11 +76,9 @@ export class GameMap extends GameObject {
         const r = Math.floor(Math.random() * this.rows)
         const c = Math.floor(Math.random() * this.cols)
         // already walls
-        if (grid[r][c] || grid[c][r])
-          continue
+        if (grid[r][c] || grid[c][r]) continue
         // omit two start points
-        if ((r === this.rows - 2 && c === 1) || (r === 1 && c === this.cols - 2))
-          continue
+        if ((r === this.rows - 2 && c === 1) || (r === 1 && c === this.cols - 2)) continue
         // set the centrosymmetric walls
         grid[r][c] = grid[c][r] = true
         break
@@ -74,27 +87,67 @@ export class GameMap extends GameObject {
 
     // copy grid to check connectivity
     const copyGrid = JSON.parse(JSON.stringify(grid))
-    if (!this.isConnected(copyGrid, this.rows - 2, 1, 1, this.cols - 2))
-      return false
+    if (!this.isConnected(copyGrid, this.rows - 2, 1, 1, this.cols - 2)) return false
 
     // pass the connectivity check, then we add wall object in grid
     for (let r = 0; r < this.rows; r++) {
-      for (let c = 0; c < this.cols; c++) {
-        if (grid[r][c])
-          this.wall.push(new Wall(r, c, this))
-      }
+      for (let c = 0; c < this.cols; c++)
+        if (grid[r][c]) this.walls.push(new Wall(r, c, this))
     }
 
     // success
     return true
   }
 
+  checkValid(cell: Cell): boolean {
+    for (const wall of this.walls)
+      if (wall.r === cell.r && wall.c === cell.c) return false
+
+    // traverse two snakes
+    for (const snake of this.snakes) {
+      let k = snake.cells.length
+      if (!snake.checkTailIncreasing()) k-- // tail moving, then don' t check tail
+      for (let i = 0; i < k; i++)
+        if (snake.cells[i].r === cell.r && snake.cells[i].c === cell.c) return false
+    }
+    return true
+  }
+
+  handleInput(): void {
+    this.ctx.canvas.focus()
+    const [snake0, snake1] = this.snakes
+    this.ctx.canvas.addEventListener('keydown', (e) => {
+      if (e.key === 'w') snake0.setDirection(0)
+      else if (e.key === 'd') snake0.setDirection(1)
+      else if (e.key === 's') snake0.setDirection(2)
+      else if (e.key === 'a') snake0.setDirection(3)
+      else if (e.key === 'ArrowUp') snake1.setDirection(0)
+      else if (e.key === 'ArrowRight') snake1.setDirection(1)
+      else if (e.key === 'ArrowDown') snake1.setDirection(2)
+      else if (e.key === 'ArrowLeft') snake1.setDirection(3)
+    })
+  }
+
   start(): void {
     // traverse 1000 times, if we can create, then break
-    for (let i = 0; i < 1000; i++) {
-      if (this.createWall())
-        break
+    for (let i = 0; i < 1000; i++)
+      if (this.createWall()) break
+
+    this.handleInput()
+  }
+
+  // check if both snakes are idle
+  // so we can start next round
+  checkReady(): boolean {
+    for (const snake of this.snakes) {
+      if (snake.status !== 'idle') return false
+      if (snake.direction === -1) return false
     }
+    return true
+  }
+
+  nextRound(): void {
+    for (const snake of this.snakes) snake.nextStep()
   }
 
   updateSize(): void {
@@ -105,6 +158,7 @@ export class GameMap extends GameObject {
 
   update(): void {
     this.updateSize()
+    if (this.checkReady()) this.nextRound()
     this.render()
   }
 
