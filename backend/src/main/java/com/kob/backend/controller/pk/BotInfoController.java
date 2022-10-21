@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BotInfoController {
     @RequestMapping("getBotInfo/")
     public String getBotInfo() {
-        return "Hello";
+        return "Hello, World";
     }
 }

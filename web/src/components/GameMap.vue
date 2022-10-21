@@ -5,7 +5,8 @@ const canvas = ref()
 const parent = ref()
 
 onMounted(() => {
-  const canvasObj = new GameMap(canvas.value.getContext('2d'), parent.value)
+  // eslint-disable-next-line no-new
+  new GameMap(canvas.value.getContext('2d'), parent.value)
 })
 </script>
 
