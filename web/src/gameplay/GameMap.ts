@@ -51,6 +51,8 @@ export class GameMap extends GameObject {
       if (!grid[xx][yy] && this.isConnected(grid, xx, yy, targetX, targetY))
         return true
     }
+    console.log("no");
+    
     return false
   }
 

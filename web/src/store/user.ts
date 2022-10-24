@@ -30,38 +30,36 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function handleLogin(data) {
-    const response = await fetch('http://127.0.0.1:3000/user/account/token/', {
-      method: 'POST',
-      body: new URLSearchParams({
-        username: data.username,
-        password: data.password,
-      }),
-    }).then(resp => {
-      if (!resp.ok) throw new Error(resp.statusText)
-      return resp.json()
-    }).then((res) => {
-      if (res.return_message === 'success') token.value = res.token
-      return res
-    }).catch((err) => {
+    try {
+      const response = await fetch('http://127.0.0.1:3000/user/account/token/', {
+        method: 'POST',
+        body: new URLSearchParams({
+          username: data.username,
+          password: data.password,
+        }),
+      })
+      if (response.ok) return response.json()
+      else throw new Error(response.statusText)
+    }
+    catch (err) {
       console.log(err)
-      return {
-        return_message: 'error',
-      }
-    })
-    return response
+    }
   }
 
   async function getInfo() {
-    const response = await fetch('http://127.0.0.1:3000/user/account/info/', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token.value}`,
-      },
-    }).then((resp) => {
-      if (!resp.ok) throw new Error(resp.statusText)
-      return resp.json()
-    }).catch(err => console.log(err))
-    return response
+    try {
+      const response = await fetch('http://127.0.0.1:3000/user/account/info/', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token.value}`,
+        },
+      })
+      if (response.ok) return await response.json()
+      else throw new Error(response.statusText)
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
 
   return {
@@ -71,6 +69,7 @@ export const useUserStore = defineStore('user', () => {
     isLogin,
     otherNames,
     savedName,
+    token,
   }
 })
 

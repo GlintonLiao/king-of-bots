@@ -1,45 +1,37 @@
 <script setup lang="ts">
 const user = useUserStore()
-const name = $ref(user.savedName)
 
 const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
 
 const username = ref('')
 const password = ref('')
-const return_message = ref('')
+const error_message = ref('')
 
 const login = () => {
-  // return_message.value = ''
+  error_message.value = ''
   const response = user.handleLogin({
     username: username.value,
     password: password.value,
   })
+
   response.then((data) => {
-    if (data.return_message !== 'error') {
-      const res = user.getInfo()
-      console.log(res)
-      user.isLogin = true
-      router.push('/pk/')
+    if (data?.return_message === 'success') {
+      user.token = data.token
+      const userData = user.getInfo()
+      userData.then((res) => {
+        if (res.return_message !== 'error') {
+          user.isLogin = true
+          router.push('/pk/')
+        }
+      })
     }
-    else {
-      return_message.value = "Wrong username or password."
-    }
+    else { error_message.value = 'Wrong username or password.' }
   })
 }
 
 const logout = () => {
   user.$reset()
 }
-
-// const data = {
-//   username: 'lgt',
-//   password: 'plgt',
-// }
-// // backend test
 
 // fetch('http://127.0.0.1:3000/user/account/register/', {
 //   method: 'POST',
@@ -103,10 +95,10 @@ const { t } = useI18n()
       bg="transparent"
       border="~ rounded gray-200 dark:gray-700"
       outline="none active:none"
-      @keydown.enter="go"
+      @keydown.enter="login"
     >
     <div class="error-message text-red-400">
-      {{ return_message }}
+      {{ error_message }}
     </div>
 
     <div class="flex justify-center">
@@ -117,9 +109,9 @@ const { t } = useI18n()
         {{ t('login.login-button') }}
       </button>
       <button
-        btn m-3 text-
-        :disabled="!name"
-        @click="go"
+        btn m-3 text-sm
+        :disabled="!password"
+        @click="login"
       >
         {{ t('login.register-button') }}
       </button>
