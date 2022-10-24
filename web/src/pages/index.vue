@@ -8,8 +8,52 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
 
+// const data = {
+//   username: 'lgt',
+//   password: 'plgt',
+// }
 // // backend test
-// fetch('http://127.0.0.1:3000/pk/getBotInfo/').then(res => res.text())
+// fetch('http://127.0.0.1:3000/user/account/token/', {
+//   method: 'POST',
+//   body: new URLSearchParams({
+//     username: 'lgt',
+//     password: 'plgt',
+//   }),
+// }).then(resp => resp.json())
+//   .then((data) => {
+//     console.log(data)
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
+
+// fetch('http://127.0.0.1:3000/user/account/info/', {
+//   method: 'GET',
+//   headers: {
+//     Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwNWJiYzQxZDFiYzI0MTk3ODcxMmNmZGY4YTUxNjllNiIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTY2NjQ4MDg1NywiZXhwIjoxNjY3NjkwNDU3fQ.mAVXo57B8btwjpgxLtHM-mFXczjE7gg0XuEtZcNmhqA',
+//   },
+// }).then(resp => resp.json())
+//   .then((data) => {
+//     console.log(data)
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
+
+// fetch('http://127.0.0.1:3000/user/account/register/', {
+//   method: 'POST',
+//   body: new URLSearchParams({
+//     username: 'lgt',
+//     password: 'plgt',
+//     confirmedPassword: 'plgt',
+//   }),
+// }).then(resp => resp.json())
+//   .then((data) => {
+//     console.log(data)
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
 
 const { t } = useI18n()
 </script>

@@ -12,3 +12,9 @@ intro:
   aka: Also known as
   whats-your-name: What's your name?
 not-found: Not found
+login:
+  title: User Login
+  username-holder: Please enter username
+  password-holder: Please enter password
+  login-button: Login
+  register-button: Register

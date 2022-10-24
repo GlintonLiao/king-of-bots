@@ -12,3 +12,9 @@ intro:
   aka: 也叫
   whats-your-name: 输入你的名字
 not-found: 未找到页面
+login:
+  title: 用户登录
+  username-holder: 请输入用户名
+  password-holder: 请输入密码
+  login-button: 登录
+  register-button: 注册
