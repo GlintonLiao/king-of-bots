@@ -8,46 +8,6 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
 
-router.beforeEach((to, from, next) => {
-  console.log("dasd");
-  let flag = 1
-  const jwtToken = localStorage.getItem('jwtToken')
-
-  if (jwtToken) {
-    user.token = jwtToken
-    const response = user.getInfo()
-    response.then((data) => {
-      if (data) {
-        user.isLogin = true
-        user.username = data.username
-        user.photo = data.photo
-        user.id = data.id
-        router.push('/pk/')
-      }
-      else {
-        alert('token is invalid')
-        router.push('/account/login/')
-      }
-    })
-  }
-  else {
-    flag = 2
-  }
-
-  if (to.meta.requestAuth && !user.isLogin) {
-    if (flag === 1) {
-      next()
-    }
-    else {
-      alert('Please login first')
-      next('/account/login')
-    }
-  }
-  else {
-    next()
-  }
-})
-
 const { t } = useI18n()
 </script>
 
@@ -98,6 +58,15 @@ const { t } = useI18n()
       <RouterLink
         btn m-3 text-sm
         to="/pk"
+      >
+        {{ t('button.go') }}
+      </RouterLink>
+    </div>
+
+    <div>
+      <RouterLink
+        btn m-3 text-sm
+        to="/user/bot/"
       >
         {{ t('button.go') }}
       </RouterLink>

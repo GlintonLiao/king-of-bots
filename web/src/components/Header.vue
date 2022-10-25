@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const user = useUserStore()
 
+console.log(user.isLogin);
+
 const isShow = ref(false)
 
 const logout = () => {
