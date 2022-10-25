@@ -51,8 +51,6 @@ export class GameMap extends GameObject {
       if (!grid[xx][yy] && this.isConnected(grid, xx, yy, targetX, targetY))
         return true
     }
-    console.log("no");
-    
     return false
   }
 
@@ -86,7 +84,7 @@ export class GameMap extends GameObject {
         break
       }
     }
-
+    // console.log(grid[1][this.rows - 2])
     // copy grid to check connectivity
     const copyGrid = JSON.parse(JSON.stringify(grid))
     if (!this.isConnected(copyGrid, this.rows - 2, 1, 1, this.cols - 2)) return false

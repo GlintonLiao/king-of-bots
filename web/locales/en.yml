@@ -17,4 +17,9 @@ login:
   username-holder: Please enter username
   password-holder: Please enter password
   login-button: Login
+register:
+  title: Register
+  username-holder: Please enter username
+  password-holder: Please enter password
+  confirmed-password-holder: Please confirm password
   register-button: Register

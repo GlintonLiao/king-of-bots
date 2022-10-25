@@ -17,10 +17,14 @@ const login = () => {
   response.then((data) => {
     if (data?.return_message === 'success') {
       user.token = data.token
+      localStorage.jwtToken = data.token
       const userData = user.getInfo()
       userData.then((res) => {
-        if (res.return_message !== 'error') {
+        if (res?.return_message !== 'error') {
           user.isLogin = true
+          user.username = res.username
+          user.photo = res.photo
+          user.id = res.id
           router.push('/pk/')
         }
       })
@@ -32,21 +36,6 @@ const login = () => {
 const logout = () => {
   user.$reset()
 }
-
-// fetch('http://127.0.0.1:3000/user/account/register/', {
-//   method: 'POST',
-//   body: new URLSearchParams({
-//     username: 'lgt',
-//     password: 'plgt',
-//     confirmedPassword: 'plgt',
-//   }),
-// }).then(resp => resp.json())
-//   .then((data) => {
-//     console.log(data)
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
 
 const { t } = useI18n()
 </script>
@@ -101,21 +90,12 @@ const { t } = useI18n()
       {{ error_message }}
     </div>
 
-    <div class="flex justify-center">
-      <button
-        btn m-3 text-sm
-        @click="login"
-      >
-        {{ t('login.login-button') }}
-      </button>
-      <button
-        btn m-3 text-sm
-        :disabled="!password"
-        @click="login"
-      >
-        {{ t('login.register-button') }}
-      </button>
-    </div>
+    <button
+      btn m-3 text-sm
+      @click="login"
+    >
+      {{ t('login.login-button') }}
+    </button>
   </div>
 </template>
 

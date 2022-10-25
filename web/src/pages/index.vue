@@ -8,52 +8,45 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name)}`)
 }
 
-// const data = {
-//   username: 'lgt',
-//   password: 'plgt',
-// }
-// // backend test
-// fetch('http://127.0.0.1:3000/user/account/token/', {
-//   method: 'POST',
-//   body: new URLSearchParams({
-//     username: 'lgt',
-//     password: 'plgt',
-//   }),
-// }).then(resp => resp.json())
-//   .then((data) => {
-//     console.log(data)
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
+router.beforeEach((to, from, next) => {
+  console.log("dasd");
+  let flag = 1
+  const jwtToken = localStorage.getItem('jwtToken')
 
-// fetch('http://127.0.0.1:3000/user/account/info/', {
-//   method: 'GET',
-//   headers: {
-//     Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwNWJiYzQxZDFiYzI0MTk3ODcxMmNmZGY4YTUxNjllNiIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTY2NjQ4MDg1NywiZXhwIjoxNjY3NjkwNDU3fQ.mAVXo57B8btwjpgxLtHM-mFXczjE7gg0XuEtZcNmhqA',
-//   },
-// }).then(resp => resp.json())
-//   .then((data) => {
-//     console.log(data)
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
+  if (jwtToken) {
+    user.token = jwtToken
+    const response = user.getInfo()
+    response.then((data) => {
+      if (data) {
+        user.isLogin = true
+        user.username = data.username
+        user.photo = data.photo
+        user.id = data.id
+        router.push('/pk/')
+      }
+      else {
+        alert('token is invalid')
+        router.push('/account/login/')
+      }
+    })
+  }
+  else {
+    flag = 2
+  }
 
-// fetch('http://127.0.0.1:3000/user/account/register/', {
-//   method: 'POST',
-//   body: new URLSearchParams({
-//     username: 'lgt',
-//     password: 'plgt',
-//     confirmedPassword: 'plgt',
-//   }),
-// }).then(resp => resp.json())
-//   .then((data) => {
-//     console.log(data)
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
+  if (to.meta.requestAuth && !user.isLogin) {
+    if (flag === 1) {
+      next()
+    }
+    else {
+      alert('Please login first')
+      next('/account/login')
+    }
+  }
+  else {
+    next()
+  }
+})
 
 const { t } = useI18n()
 </script>

@@ -1,5 +1,10 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
+interface LoginProps {
+  username: string
+  password: string
+}
+
 export const useUserStore = defineStore('user', () => {
   /**
    * Current name of the user.
@@ -29,7 +34,7 @@ export const useUserStore = defineStore('user', () => {
     savedName.value = name
   }
 
-  async function handleLogin(data) {
+  async function handleLogin(data: LoginProps) {
     try {
       const response = await fetch('http://127.0.0.1:3000/user/account/token/', {
         method: 'POST',
@@ -42,7 +47,7 @@ export const useUserStore = defineStore('user', () => {
       else throw new Error(response.statusText)
     }
     catch (err) {
-      console.log(err)
+      return err
     }
   }
 
@@ -58,7 +63,7 @@ export const useUserStore = defineStore('user', () => {
       else throw new Error(response.statusText)
     }
     catch (err) {
-      console.log(err)
+      return err
     }
   }
 
@@ -66,10 +71,13 @@ export const useUserStore = defineStore('user', () => {
     setNewName,
     handleLogin,
     getInfo,
+    id,
+    username,
+    photo,
+    token,
     isLogin,
     otherNames,
     savedName,
-    token,
   }
 })
 
