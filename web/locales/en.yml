@@ -23,3 +23,5 @@ register:
   password-holder: Please enter password
   confirmed-password-holder: Please confirm password
   register-button: Register
+user:
+  title: Bots List

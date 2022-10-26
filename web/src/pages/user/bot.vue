@@ -1,84 +1,107 @@
 <script setup lang="ts">
 const user = useUserStore()
 
-const router = useRouter()
-
-const username = ref('')
-const password = ref('')
-const error_message = ref('')
-
-const handleBot = () => {
-  return null
+interface Bot {
+  title: string
+  id: number
 }
 
-// fetch('http://127.0.0.1:3000/user/bot/add/', {
-//   method: 'POST',
-//   body: new URLSearchParams({
-//     title: 'Bot title',
-//     description: 'Bot description',
-//     content: 'Bot content',
-//   }),
-//   headers: {
-//     Authorization: `Bearer ${user.token}`,
-//   },
-// }).then(data => console.log(data))
+const newBot = reactive({
+  title: '',
+  description: '',
+  content: '',
+  return_message: '',
+})
+
+const errorMessage = ref('')
+
+const bots = ref<Bot[]>([])
+
+const refreshBots = () => {
+  fetch('http://127.0.0.1:3000/user/bot/getlist/', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  }).then((resp) => {
+    if (resp.ok)
+      return resp.json()
+  }).then((data) => {
+    bots.value = data
+  }).catch(err => err)
+}
+
+refreshBots()
+
+const toggleModal = () => {
+
+}
+
+const addBot = () => {
+  fetch('http://127.0.0.1:3000/user/bot/add/', {
+    method: 'POST',
+    body: new URLSearchParams({
+      title: newBot.title,
+      description: newBot.description,
+      content: newBot.content,
+    }),
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  }).then((resp) => {
+    if (resp.ok)
+      return resp.json()
+  }).then((data) => {
+    if (data.return_message === 'success') {
+      newBot.title = ''
+      newBot.description = ''
+      newBot.content = ''
+      refreshBots()
+    }
+    else {
+      errorMessage.value = data.return_message
+    }
+  }).catch(err => err)
+}
 
 const { t } = useI18n()
 </script>
 
 <template>
-  <div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        {{ t('login.title') }}
-      </a>
-    </p>
-
-    <div py-4 />
-
-    <input
-      id="input"
-      v-model="username"
-      :placeholder="t('login.username-holder')"
-      :aria-label="t('login.username-holder')"
-      type="text"
-      autocomplete="false"
-      p="x4 y2"
-      w="250px"
-      class="display-block mx-auto"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-    >
-
-    <input
-      id="input"
-      v-model="password"
-      :placeholder="t('login.password-holder')"
-      :aria-label="t('login.password-holder')"
-      type="password"
-      autocomplete="false"
-      class="display-block  mx-auto"
-      p="x4 y2"
-      m="y2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="handleBot"
-    >
-    <div class="error-message text-red-400">
-      {{ error_message }}
+  <div py-2 />
+  <div flex>
+    <div shadow-lg mr-3 rd-3 h-60 overflow-hidden>
+      <img :src="user.photo" alt="" mb-3>
+      <p>{{ user.username }}</p>
     </div>
 
-    <button
-      btn m-3 text-sm
-      @click="handleBot"
-    >
-      {{ t('login.login-button') }}
-    </button>
+    <div text-left w-full shadow-lg rd-3>
+      <div rel="noreferrer" text-2xl flex font-500 justify-between href="https://github.com/antfu/vitesse" target="_blank">
+        <div w-15 />
+        {{ t('user.title') }}
+        <button btn text-sm mr-8 bg-blue-700 hover-bg-blue-800>
+          <div i-carbon-add />
+        </button>
+      </div>
+
+      <ul mt-2 px-6 max-h-60vh overflow-scroll>
+        <li v-for="bot in bots" :key="bot.id" p-2 flex justify-between border-b-1>
+          <div flex-1>
+            {{ bot.title }}
+          </div>
+          <button btn mx-2 text-sm @click="toggleModal">
+            Change
+          </button>
+          <button btn bg-red-700 hover-bg-red-800 text-sm>
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="error-message text-red-400">
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
 

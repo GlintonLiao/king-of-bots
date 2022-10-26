@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 const user = useUserStore()
 const route = useRoute()
 const isShow = ref(false)
@@ -21,7 +23,9 @@ const show = () => {
   <nav class="text-md mb-5 flex justify-around color-bluegray">
     <div class="">
       <button class="px-5" :class="route.name === 'pk' ? 'text-gray-700' : ''">
-        Battle
+        <RouterLink to="/pk/">
+          Battle
+        </RouterLink>
       </button>
       <button class="px-5">
         Game List
