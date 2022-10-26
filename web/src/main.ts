@@ -11,7 +11,6 @@ import 'uno.css'
 
 const routes = setupLayouts(generatedRoutes)
 
-
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
@@ -37,10 +36,9 @@ export const createApp = ViteSSG(
             user.username = data.username
             user.photo = data.photo
             user.id = data.id
-            ctx.router.push('/pk/')
+            next()
           }
           else {
-            alert('token is invalid')
             ctx.router.push('/account/login/')
           }
         })

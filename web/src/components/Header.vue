@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const user = useUserStore()
-
-console.log(user.isLogin);
-
+const route = useRoute()
 const isShow = ref(false)
 
 const logout = () => {
@@ -20,16 +18,16 @@ const show = () => {
 </script>
 
 <template>
-  <nav class="text-xl mb-5 flex justify-around color-bluegray">
+  <nav class="text-md mb-5 flex justify-around color-bluegray">
     <div class="">
-      <button class="px-5">
+      <button class="px-5" :class="route.name === 'pk' ? 'text-gray-700' : ''">
         Battle
       </button>
       <button class="px-5">
         Game List
       </button>
       <button class="px-5">
-        Ranking
+        Rankings
       </button>
     </div>
 
@@ -38,10 +36,12 @@ const show = () => {
         {{ user.username }}
       </button>
       <div id="myDropdown" class="dropdown-content" :class="{ show: isShow }">
-        <RouterLink w-full to="/user/">
-          User Center
-        </RouterLink>
-        <button w-full @click="logout">
+        <button w-full py-2>
+          <RouterLink to="/user/bot/">
+            User Center
+          </RouterLink>
+        </button>
+        <button w-full py-2 @click="logout">
           Logout
         </button>
       </div>
@@ -57,7 +57,8 @@ const show = () => {
   </nav>
 </template>
 
-<style scoped>/* Dropdown Button */
+<style scoped>
+/* Dropdown Button */
 .dropbtn {
   border: none;
   cursor: pointer;
@@ -73,14 +74,14 @@ const show = () => {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content *:hover {background-color: #ddd;}
+.dropdown-content *:hover {background-color: rgb(229, 229, 229);}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {

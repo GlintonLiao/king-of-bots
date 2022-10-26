@@ -28,13 +28,13 @@ export class GameMap extends GameObject {
     this.snakes = [
       new Snake({
         id: 0,
-        color: '#4876ec',
+        color: '#395144',
         r: this.rows - 2,
         c: 1,
       }, this),
       new Snake({
         id: 1,
-        color: '#F94848',
+        color: '#AA8B56',
         r: 1,
         c: this.cols - 2,
       }, this),

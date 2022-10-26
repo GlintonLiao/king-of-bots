@@ -7,31 +7,27 @@ const username = ref('')
 const password = ref('')
 const error_message = ref('')
 
-fetch('http://127.0.0.1:3000/user/bot/add/', {
-  method: 'POST',
-  body: new URLSearchParams({
-    title: 'Bot title',
-    description: 'Bot description',
-    content: 'Bot content',
-  }),
-  headers: {
-    Authorization: `Bearer ${user.token}`,
-  },
-}).then(data => console.log(data))
+const handleBot = () => {
+  return null
+}
 
-  
-  // response.then((data) => {
-  //   console.log(data.json())
-  // })
+// fetch('http://127.0.0.1:3000/user/bot/add/', {
+//   method: 'POST',
+//   body: new URLSearchParams({
+//     title: 'Bot title',
+//     description: 'Bot description',
+//     content: 'Bot content',
+//   }),
+//   headers: {
+//     Authorization: `Bearer ${user.token}`,
+//   },
+// }).then(data => console.log(data))
 
 const { t } = useI18n()
 </script>
 
 <template>
   <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
     <p>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
         {{ t('login.title') }}
@@ -88,5 +84,5 @@ const { t } = useI18n()
 
 <route lang="yaml">
 meta:
-  layout: home
+  layout: user
 </route>

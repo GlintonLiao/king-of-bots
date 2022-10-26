@@ -10,10 +10,6 @@ const toggleLocales = () => {
 
 <template>
   <nav text-xl mt-6>
-    <RouterLink class="icon-btn mx-2" to="/" :title="t('button.home')">
-      <div i-carbon-campsite />
-    </RouterLink>
-
     <button class="icon-btn mx-2 !outline-none" :title="t('button.toggle_dark')" @click="toggleDark()">
       <div i="carbon-sun dark:carbon-moon" />
     </button>
@@ -30,4 +26,7 @@ const toggleLocales = () => {
       <div i-carbon-logo-github />
     </a>
   </nav>
+  <div class="mt-5 mx-auto text-center opacity-75 dark:opacity-50 text-sm">
+    Designed and coded by Guotong Liao
+  </div>
 </template>
