@@ -4,9 +4,10 @@ import { GameMap } from '../gameplay'
 const canvas = ref()
 const parent = ref()
 
+const pk = usePkStore()
+
 onMounted(() => {
-  // eslint-disable-next-line no-new
-  new GameMap(canvas.value.getContext('2d'), parent.value)
+  pk.gameObj = new GameMap(canvas.value.getContext('2d'), parent.value)
 })
 </script>
 

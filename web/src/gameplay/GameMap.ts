@@ -11,6 +11,7 @@ export class GameMap extends GameObject {
   innerWallsCount: number
   walls: Wall[]
   snakes: Snake[]
+  pk: any
 
   constructor(ctx: CanvasRenderingContext2D, parent: HTMLDivElement) {
     super()
@@ -18,6 +19,8 @@ export class GameMap extends GameObject {
     this.ctx = ctx
     this.parent = parent
     this.len = 0
+
+    this.pk = usePkStore()
 
     this.rows = 13
     this.cols = 14 // prevents two snakes run into same block at same time
@@ -54,49 +57,12 @@ export class GameMap extends GameObject {
     return false
   }
 
-  createWall(): boolean {
-    const grid: boolean[][] = []
-
-    // init
-    for (let r = 0; r < this.rows; r++) {
-      grid[r] = []
-      for (let c = 0; c < this.cols; c++)
-        grid[r][c] = false
-    }
-
-    // set surrounding walls
-    for (let r = 0; r < this.rows; r++)
-      grid[r][0] = grid[r][this.cols - 1] = true
-    for (let c = 0; c < this.cols; c++)
-      grid[0][c] = grid[this.rows - 1][c] = true
-
-    // random walls inside
-    for (let i = 0; i < this.innerWallsCount / 2; i++) {
-      for (let j = 0; j < 1000; j++) {
-        const r = Math.floor(Math.random() * this.rows)
-        const c = Math.floor(Math.random() * this.cols)
-        // already walls
-        if (grid[r][c] || grid[c][r]) continue
-        // omit two start points
-        if ((r === this.rows - 2 && c === 1) || (r === 1 && c === this.cols - 2)) continue
-        // set the centrosymmetric walls
-        grid[r][c] = grid[c][r] = true
-        break
-      }
-    }
-    // console.log(grid[1][this.rows - 2])
-    // copy grid to check connectivity
-    const copyGrid = JSON.parse(JSON.stringify(grid))
-    if (!this.isConnected(copyGrid, this.rows - 2, 1, 1, this.cols - 2)) return false
-
-    // pass the connectivity check, then we add wall object in grid
+  createWall(): void {
+    const grid = this.pk.gameMap
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.cols; c++)
         if (grid[r][c]) this.walls.push(new Wall(r, c, this))
     }
-
-    // success
-    return true
   }
 
   checkValid(cell: Cell): boolean {
@@ -115,24 +81,24 @@ export class GameMap extends GameObject {
 
   handleInput(): void {
     this.ctx.canvas.focus()
-    const [snake0, snake1] = this.snakes
     this.ctx.canvas.addEventListener('keydown', (e) => {
-      if (e.key === 'w') snake0.setDirection(0)
-      else if (e.key === 'd') snake0.setDirection(1)
-      else if (e.key === 's') snake0.setDirection(2)
-      else if (e.key === 'a') snake0.setDirection(3)
-      else if (e.key === 'ArrowUp') snake1.setDirection(0)
-      else if (e.key === 'ArrowRight') snake1.setDirection(1)
-      else if (e.key === 'ArrowDown') snake1.setDirection(2)
-      else if (e.key === 'ArrowLeft') snake1.setDirection(3)
+      let d = -1
+      if (e.key === 'w') d = 0
+      else if (e.key === 'd') d = 1
+      else if (e.key === 's') d = 2
+      else if (e.key === 'a') d = 3
+
+      if (d >= 0) {
+        this.store.socket.send(JSON.stringify({
+          event: 'move',
+          direction: d,
+        }))
+      }
     })
   }
 
   start(): void {
-    // traverse 1000 times, if we can create, then break
-    for (let i = 0; i < 1000; i++)
-      if (this.createWall()) break
-
+    this.createWall()
     this.handleInput()
   }
 

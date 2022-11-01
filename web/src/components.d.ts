@@ -15,6 +15,8 @@ declare module '@vue/runtime-core' {
     MatchGround: typeof import('./components/MatchGround.vue')['default']
     PlayGround: typeof import('./components/PlayGround.vue')['default']
     README: typeof import('./components/README.md')['default']
+    ResultBoard: typeof import('./components/ResultBoard.vue')['default']
+    ResultGround: typeof import('./components/ResultGround.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -6,13 +6,13 @@ const matchInfo = ref('Start Matching')
 const handleClick = () => {
   if (matchInfo.value === 'Start Matching') {
     matchInfo.value = 'Cancel'
-    pk.socket.send(JSON.stringify({
+    pk.socket?.send(JSON.stringify({
       event: 'start-matching',
     }))
   }
   else {
     matchInfo.value = 'Start Matching'
-    pk.socket.send(JSON.stringify({
+    pk.socket?.send(JSON.stringify({
       event: 'stop-matching',
     }))
   }
@@ -20,28 +20,28 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div w-60vh h-70vh mx-40 bg-blue>
-    <div class="row">
-      <div class="col">
-        <div class="user-photo">
+  <div w-60vh h-70vh mx-40>
+    <div flex justify-around p-10>
+      <div p-6 max-w-50>
+        <div shadow-lg>
           <img :src="user.photo" alt="">
         </div>
-        <div class="username">
+        <div mt-5>
           {{ user.username }}
         </div>
       </div>
 
-      <div class="col">
-        <div class="user-photo">
+      <div p-6 max-w-50>
+        <div shadow-lg>
           <img :src="pk.opponentPhoto" alt="">
         </div>
-        <div class="username">
+        <div mt-5>
           {{ pk.opponentUsername }}
         </div>
       </div>
     </div>
-    <div text-center pt-15vh>
-      <button @click="handleClick">
+    <div text-center pt-6>
+      <button btn @click="handleClick">
         {{ matchInfo }}
       </button>
     </div>

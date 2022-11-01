@@ -91,10 +91,6 @@ export class Snake extends GameObject {
 
     for (let i = this.cells.length; i > 0; i--)
       this.cells[i] = JSON.parse(JSON.stringify(this.cells[i - 1]))
-
-    // check if next cell hits the wall
-    // TODO: see if can early return
-    if (!this.gameMap.checkValid(this.nextCell)) this.status = 'die'
   }
 
   updateMove(): void {

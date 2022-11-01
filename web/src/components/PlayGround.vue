@@ -3,14 +3,7 @@ import GameMap from './GameMap.vue'
 </script>
 
 <template>
-  <div class="playground">
+  <div w-70vw h-70vh>
     <GameMap />
   </div>
 </template>
-
-<style>
-  .playground {
-    width: 70vw;
-    height: 70vh;
-  }
-</style>
