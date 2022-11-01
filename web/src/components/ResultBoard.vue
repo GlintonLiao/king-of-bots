@@ -11,21 +11,21 @@ const restart = () => {
 </script>
 
 <template>
-  <div class="result-board h-30vh w-30vw absolute top-30vh left-35vw bg-light-blue-200">
-    <div v-if="pk.loser === 'all'" text-center color-white font-50 p-t-5vh>
+  <div class="h-30vh w-40vw absolute top-30vh left-1/2 translate-x--1/2 bg-light shadow-lg">
+    <div v-if="pk.loser === 'all'" text-center color-white font-50 text-xl p-t-5vh>
       Draw
     </div>
-    <div v-else-if="pk.loser === 'A' && pk.aId === parseInt(user.id)" text-center color-white font-50 p-t-5vh>
+    <div v-else-if="pk.loser === 'A' && pk.aId === parseInt(user.id)" text-xl text-center color-white font-50 p-t-5vh>
       Lose
     </div>
-    <div v-else-if="pk.loser === 'B' && pk.bId === parseInt(user.id)" text-center color-white font-50 p-t-5vh>
+    <div v-else-if="pk.loser === 'B' && pk.bId === parseInt(user.id)" text-xl text-center color-white font-50 p-t-5vh>
       Lose
     </div>
-    <div v-else text-center color-white font-50 p-t-5vh>
+    <div v-else text-center text-xl color-white font-50 p-t-5vh>
       Win
     </div>
     <div>
-      <button type="button" btn p-t-10 text-center @click="restart">
+      <button type="button" btn m-t-10 text-center @click="restart">
         Restart
       </button>
     </div>

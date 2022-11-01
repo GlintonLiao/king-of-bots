@@ -21,8 +21,7 @@ onMounted(() => {
       setTimeout(() => {
         pk.status = 'playing'
       }, 2000)
-      pk.gameMap = data.game.map
-      pk.aId = data.game.aId
+      pk.updateGame(data.game)
     }
     else if (data.event === 'move') {
       console.log(data)
@@ -49,9 +48,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <PlayGround v-if="pk.status === 'playing'" class="w-screen-md h-screen-lg mx-auto" />
+  <PlayGround v-if="pk.status === 'playing'" class="w-screen-md mx-auto" />
   <MatchGround v-if="pk.status === 'matching'" class="w-screen-md mx-auto" />
-  <ResultGround v-if="pk.loser !== 'none'" class="w-screen-md mx-auto" />
+  <ResultBoard v-if="pk.loser !== 'none'" class="mx-auto" />
 </template>
 
 <route lang="yaml">

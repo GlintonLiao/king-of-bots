@@ -89,7 +89,7 @@ export class GameMap extends GameObject {
       else if (e.key === 'a') d = 3
 
       if (d >= 0) {
-        this.store.socket.send(JSON.stringify({
+        this.pk.socket.send(JSON.stringify({
           event: 'move',
           direction: d,
         }))

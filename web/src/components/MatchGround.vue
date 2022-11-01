@@ -20,7 +20,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div w-60vh h-70vh mx-40>
+  <div w-60vh h-70vh mx-auto>
     <div flex justify-around p-10>
       <div p-6 max-w-50>
         <div shadow-lg>
