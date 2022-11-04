@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 
 const user = useUserStore()
 const route = useRoute()
-const isShow = ref(false)
+const isShow = ref(true)
 
 const logout = () => {
   localStorage.removeItem('jwtToken')
@@ -39,13 +39,13 @@ const show = () => {
       <button class="dropbtn" @click="show">
         {{ user.username }}
       </button>
-      <div id="myDropdown" class="dropdown-content" :class="{ show: isShow }">
-        <button w-full py-2>
-          <RouterLink to="/user/bot/">
+      <div class="w-40 fixed m-t-2 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" :class="{ show: isShow }">
+        <RouterLink to="/user/bot/">
+          <div py-3 px-4 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white @click="show">
             User Center
-          </RouterLink>
-        </button>
-        <button w-full py-2 @click="logout">
+          </div>
+        </RouterLink>
+        <button w-full py-3 px-4 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white @click="logout">
           Logout
         </button>
       </div>
@@ -62,33 +62,7 @@ const show = () => {
 </template>
 
 <style scoped>
-/* Dropdown Button */
-.dropbtn {
-  border: none;
-  cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content *:hover {background-color: rgb(229, 229, 229);}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
-  display:block;
+  display: none;
 }
 </style>
