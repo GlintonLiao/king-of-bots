@@ -19,5 +19,6 @@ declare module '@vue/runtime-core' {
     ResultGround: typeof import('./components/ResultGround.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VAceEditor: typeof import('vue3-ace-editor')['VAceEditor']
   }
 }
