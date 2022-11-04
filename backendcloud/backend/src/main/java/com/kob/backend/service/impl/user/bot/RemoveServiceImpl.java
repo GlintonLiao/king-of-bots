@@ -30,7 +30,7 @@ public class RemoveServiceImpl implements RemoveService {
             return map;
         }
 
-        if (!bot.getId().equals(user.getId())) {
+        if (!bot.getUserId().equals(user.getId())) {
             map.put("return_message", "No authorization to delete the bot");
             return map;
         }
