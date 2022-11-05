@@ -7,9 +7,10 @@ onMounted(() => {
   pk.opponentUsername = 'My Opponent'
   pk.opponentPhoto = 'https://cdn.acwing.com/media/article/image/2022/08/09/1_1db2488f17-anonymous.png'
 
+  pk.loser = 'none'
+
   const socket = new WebSocket(socketUrl)
   socket.onopen = () => {
-    console.log('connected!')
     pk.socket = socket
   }
 
@@ -20,18 +21,16 @@ onMounted(() => {
       pk.opponentPhoto = data.opponent_photo
       setTimeout(() => {
         pk.status = 'playing'
-      }, 2000)
+      }, 200)
       pk.updateGame(data.game)
     }
     else if (data.event === 'move') {
-      console.log(data)
       const game = pk.gameObj
       const [snake0, snake1] = game.snakes
       snake0.setDirection(data.a_direction)
       snake1.setDirection(data.b_direction)
     }
     else if (data.event === 'result') {
-      console.log(data)
       const game = pk.gameObj
       const [snake0, snake1] = game.snakes
 

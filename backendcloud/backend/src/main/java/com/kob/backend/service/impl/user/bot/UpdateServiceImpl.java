@@ -65,8 +65,8 @@ public class UpdateServiceImpl implements UpdateService {
             return map;
         }
 
-        if (!bot.getId().equals(user.getId())) {
-            map.put("return_message", "No authorization to delete the bot");
+        if (!bot.getUserId().equals(user.getId())) {
+            map.put("return_message", "No authorization to update the bot");
             return map;
         }
 

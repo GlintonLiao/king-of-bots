@@ -1,3 +1,4 @@
+/* eslint-disable antfu/if-newline */
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { Cell, DX, DY, GameMap, GameObject } from '../gameplay'
 
@@ -146,20 +147,10 @@ export class Snake extends GameObject {
       const a = this.cells[i - 1]
       const b = this.cells[i]
       if (Math.abs(a.x - b.x) < this.eps && Math.abs(a.y - b.y) < this.eps) continue
-      if (Math.abs(a.x - b.x) < this.eps) {
-        ctx.fillRect((a.x - 0.4) * len,
-          Math.min(a.y, b.y) * len,
-          len * 0.8,
-          Math.abs(a.y - b.y) * len,
-        )
-      }
-      else {
-        ctx.fillRect(Math.min(a.x, b.x) * len,
-          (a.y - 0.4) * len,
-          Math.abs(a.x - b.x) * len,
-          len * 0.8,
-        )
-      }
+      if (Math.abs(a.x - b.x) < this.eps)
+        ctx.fillRect((a.x - 0.4) * len, Math.min(a.y, b.y) * len, len * 0.8, Math.abs(a.y - b.y) * len)
+      else
+        ctx.fillRect(Math.min(a.x, b.x) * len, (a.y - 0.4) * len, Math.abs(a.x - b.x) * len, len * 0.8)
     }
 
     // eyes

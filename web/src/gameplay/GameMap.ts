@@ -44,19 +44,6 @@ export class GameMap extends GameObject {
     ]
   }
 
-  isConnected(grid: boolean[][], x: number, y: number, targetX: number, targetY: number): boolean {
-    if (x === targetX && y === targetY) return true
-
-    grid[x][y] = true
-    for (let i = 0; i < 4; i++) {
-      const xx = x + DX[i]
-      const yy = y + DY[i]
-      if (!grid[xx][yy] && this.isConnected(grid, xx, yy, targetX, targetY))
-        return true
-    }
-    return false
-  }
-
   createWall(): void {
     const grid = this.pk.gameMap
     for (let r = 0; r < this.rows; r++) {
@@ -117,7 +104,7 @@ export class GameMap extends GameObject {
   }
 
   updateSize(): void {
-    this.len = Math.floor(Math.min(this.parent.clientWidth / this.cols, this.parent.clientHeight / this.rows))
+    this.len = parseInt(Math.min(this.parent.clientWidth / this.cols, this.parent.clientHeight / this.rows))
     this.ctx.canvas.width = this.len * this.cols
     this.ctx.canvas.height = this.len * this.rows
   }

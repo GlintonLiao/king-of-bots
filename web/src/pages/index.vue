@@ -57,7 +57,7 @@ const { t } = useI18n()
     <div>
       <RouterLink
         btn m-3 text-sm
-        to="/pk"
+        to="/pk/"
       >
         {{ t('button.go') }}
       </RouterLink>
