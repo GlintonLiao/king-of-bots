@@ -12,6 +12,7 @@ export class GameMap extends GameObject {
   walls: Wall[]
   snakes: Snake[]
   pk: any
+  record: any
 
   constructor(ctx: CanvasRenderingContext2D, parent: HTMLDivElement) {
     super()
@@ -21,6 +22,7 @@ export class GameMap extends GameObject {
     this.len = 0
 
     this.pk = usePkStore()
+    this.record = useRecordStore()
 
     this.rows = 13
     this.cols = 14 // prevents two snakes run into same block at same time
@@ -67,21 +69,44 @@ export class GameMap extends GameObject {
   }
 
   handleInput(): void {
-    this.ctx.canvas.focus()
-    this.ctx.canvas.addEventListener('keydown', (e) => {
-      let d = -1
-      if (e.key === 'w') d = 0
-      else if (e.key === 'd') d = 1
-      else if (e.key === 's') d = 2
-      else if (e.key === 'a') d = 3
+    if (this.record.isRecording) {
+      let k = 0
+      const aSteps = this.record.a_steps
+      const bSteps = this.record.b_steps
+      const loser = this.record.recordLoser
+      const [snake0, snake1] = this.snakes
+      const intervalId = setInterval(() => {
+        if (k >= aSteps.length - 1) {
+          if (loser === 'all' || loser === 'A')
+            snake0.status = 'die'
+          if (loser === 'all' || loser === 'B')
+            snake1.status = 'die'
+          clearInterval(intervalId)
+        }
+        else {
+          snake0.setDirection(parseInt(aSteps[k]))
+          snake1.setDirection(parseInt(bSteps[k]))
+        }
+        k++
+      }, 300)
+    }
+    else {
+      this.ctx.canvas.focus()
+      this.ctx.canvas.addEventListener('keydown', (e) => {
+        let d = -1
+        if (e.key === 'w') d = 0
+        else if (e.key === 'd') d = 1
+        else if (e.key === 's') d = 2
+        else if (e.key === 'a') d = 3
 
-      if (d >= 0) {
-        this.pk.socket.send(JSON.stringify({
-          event: 'move',
-          direction: d,
-        }))
-      }
-    })
+        if (d >= 0) {
+          this.pk.socket.send(JSON.stringify({
+            event: 'move',
+            direction: d,
+          }))
+        }
+      })
+    }
   }
 
   start(): void {
@@ -104,7 +129,7 @@ export class GameMap extends GameObject {
   }
 
   updateSize(): void {
-    this.len = parseInt(Math.min(this.parent.clientWidth / this.cols, this.parent.clientHeight / this.rows))
+    this.len = Math.floor(Math.min(this.parent.clientWidth / this.cols, this.parent.clientHeight / this.rows))
     this.ctx.canvas.width = this.len * this.cols
     this.ctx.canvas.height = this.len * this.rows
   }

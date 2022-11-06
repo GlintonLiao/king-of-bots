@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const pk = usePkStore()
 const user = useUserStore()
+const re = useRecordStore()
 const socketUrl = `ws://127.0.0.1:3000/websocket/${user.token}/`
 
 onMounted(() => {
@@ -8,6 +9,7 @@ onMounted(() => {
   pk.opponentPhoto = 'https://cdn.acwing.com/media/article/image/2022/08/09/1_1db2488f17-anonymous.png'
 
   pk.loser = 'none'
+  re.isRecording = false
 
   const socket = new WebSocket(socketUrl)
   socket.onopen = () => {

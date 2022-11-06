@@ -97,8 +97,6 @@ const updateBot = (bot: Bot) => {
     if (resp.ok)
       return resp.json()
   }).then((data) => {
-    console.log(data);
-    
     if (data.return_message === 'success') {
       hideModal(`update-bot-modal-${bot.id}`)
       refreshBots()

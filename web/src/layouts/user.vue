@@ -4,7 +4,7 @@
     <div class="max-w-60vw mx-auto">
       <RouterView />
     </div>
-    <div fixed bottom-10 class="footer">
+    <div bottom-10 class="footer">
       <Footer />
     </div>
   </main>
@@ -14,8 +14,4 @@
 /* * {
   outline: 1px solid limegreen;
 } */
-.footer {
-  left: 50%;
-  transform: translateX(-50%);
-}
 </style>

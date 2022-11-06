@@ -27,8 +27,10 @@ const show = () => {
           Battle
         </RouterLink>
       </button>
-      <button class="px-5">
-        Game List
+      <button class="px-5" :class="route.name === 'record' ? 'text-gray-700' : ''">
+        <RouterLink to="/record/">
+          Game Records
+        </RouterLink>
       </button>
       <button class="px-5">
         Rankings
