@@ -32,8 +32,10 @@ const show = () => {
           Game Records
         </RouterLink>
       </button>
-      <button class="px-5">
-        Rankings
+      <button class="px-5" :class="route.name === 'ranklist' ? 'text-gray-700' : ''">
+        <RouterLink to="/ranklist/">
+          Rankings
+        </RouterLink>
       </button>
     </div>
 

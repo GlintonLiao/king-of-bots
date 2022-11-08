@@ -9,7 +9,7 @@ export class GameMap extends GameObject {
   rows: number
   cols: number
   innerWallsCount: number
-  walls: Wall[]
+  walls: Wall[] = []
   snakes: Snake[]
   pk: any
   record: any

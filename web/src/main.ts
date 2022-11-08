@@ -11,7 +11,6 @@ import 'uno.css'
 
 const routes = setupLayouts(generatedRoutes)
 
-// https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
   { routes, base: import.meta.env.BASE_URL },
@@ -37,22 +36,19 @@ export const createApp = ViteSSG(
             user.photo = data.photo
             user.id = data.id
             next()
-          }
-          else {
+          } else {
             ctx.router.push('/account/login/')
           }
         })
       }
       else {
         flag = 2
-      }
-
-      if (to.meta.requestAuth && !user.isLogin) {
-        if (flag === 1) next()
-        else next('/account/login')
-      }
-      else {
-        next()
+        if (to.meta.requestAuth && !user.isLogin) {
+          if (flag === 1) next()
+          else next('/account/login')
+        } else {
+          next()
+        }
       }
     })
   },

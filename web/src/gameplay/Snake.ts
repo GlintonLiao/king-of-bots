@@ -86,6 +86,7 @@ export class Snake extends GameObject {
       this.cells[0].r + DX[d],
       this.cells[0].c + DY[d],
     )
+    this.eyeDirection = d
     this.direction = -1 // clear direction
     this.status = 'move' // update signal
     this.round++
@@ -157,7 +158,7 @@ export class Snake extends GameObject {
     ctx.fillStyle = 'black'
     for (let i = 0; i < 2; i++) {
       const eyeX = (this.cells[0].x + this.eyeDx[this.eyeDirection][i] * 0.15) * len
-      const eyeY = (this.cells[0].y + this.eyeDx[this.eyeDirection][i] * 0.15) * len
+      const eyeY = (this.cells[0].y + this.eyeDy[this.eyeDirection][i] * 0.15) * len
 
       ctx.beginPath()
       ctx.arc(eyeX, eyeY, len * 0.05, 0, Math.PI * 2)
