@@ -25,15 +25,23 @@
 
 Under Construction...
 
-## Project Structure
+## Tech Stacks
 
 + Front-end: 
   + Vue.js
+    + TypeScript
+    + Composition API
+    + Vue-Router
   + UnoCSS
+  + Pinia
+  + Vite
+  + Vitest
 + Back-end: 
   + SpringBoot & Java
+  + MyBatis-Plus
   + SpringCloud
-  + AWS
+  + Lombok
+  + Docker
   + Redis
   
 ## Key Concepts
