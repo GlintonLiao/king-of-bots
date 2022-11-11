@@ -2,7 +2,7 @@
 const pk = usePkStore()
 const user = useUserStore()
 const re = useRecordStore()
-const socketUrl = `ws://127.0.0.1:3000/websocket/${user.token}/`
+const socketUrl = `wss://app3920.acapp.acwing.com.cn/websocket/${user.token}/`
 
 onMounted(() => {
   pk.opponentUsername = 'My Opponent'

@@ -7,7 +7,7 @@ const confirmedPassword = ref('')
 const error_message = ref('')
 
 const register = () => {
-  const response = fetch('http://127.0.0.1:3000/user/account/register/', {
+  const response = fetch('https://app3920.acapp.acwing.com.cn/api/user/account/register/', {
     method: 'POST',
     body: new URLSearchParams({
       username: username.value,

@@ -36,7 +36,7 @@ export const useUserStore = defineStore('user', () => {
 
   async function handleLogin(data: LoginProps) {
     try {
-      const response = await fetch('http://127.0.0.1:3000/user/account/token/', {
+      const response = await fetch('https://app3920.acapp.acwing.com.cn/api/user/account/token/', {
         method: 'POST',
         body: new URLSearchParams({
           username: data.username,
@@ -53,7 +53,7 @@ export const useUserStore = defineStore('user', () => {
 
   async function getInfo() {
     try {
-      const response = await fetch('http://127.0.0.1:3000/user/account/info/', {
+      const response = await fetch('https://app3920.acapp.acwing.com.cn/api/user/account/info/', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token.value}`,

@@ -9,7 +9,7 @@ const users = ref<any[]>([])
 const pages = ref<any[]>([])
 
 const updatePage = () => {
-  const maxPage = Math.floor(Math.ceil(totalUsers / 3))
+  const maxPage = Math.floor(Math.ceil(totalUsers / 10))
   const newPages = []
   for (let i = currentPage - 2; i <= currentPage + 2; i++) {
     if (i >= 1 && i <= maxPage) {
@@ -25,7 +25,7 @@ const updatePage = () => {
 const clickPage = (page) => {
   if (page === -2) page = currentPage - 1
   else if (page === -1) page = currentPage + 1
-  const maxPages = Math.floor(Math.ceil(totalUsers / 3))
+  const maxPages = Math.floor(Math.ceil(totalUsers / 10))
   if (page >= 1 && page <= maxPages)
     pullPage(page)
 }
@@ -33,7 +33,7 @@ const clickPage = (page) => {
 async function pullPage(page: number) {
   currentPage = page
   try {
-    const response = await fetch(`http://127.0.0.1:3000/ranklist/getlist/?page=${page}`, {
+    const response = await fetch(`https://app3920.acapp.acwing.com.cn/api/ranklist/getlist/?page=${page}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${user.token}`,

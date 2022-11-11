@@ -27,7 +27,7 @@ const errorMessage = ref('')
 const bots = ref<Bot[]>([])
 
 const refreshBots = () => {
-  fetch('http://127.0.0.1:3000/user/bot/getlist/', {
+  fetch('https://app3920.acapp.acwing.com.cn/api/user/bot/getlist/', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${user.token}`,
@@ -54,7 +54,7 @@ const hideModal = (id: string) => {
 }
 
 const addBot = () => {
-  fetch('http://127.0.0.1:3000/user/bot/add/', {
+  fetch('https://app3920.acapp.acwing.com.cn/api/user/bot/add/', {
     method: 'POST',
     body: new URLSearchParams({
       title: newBot.title,
@@ -82,7 +82,7 @@ const addBot = () => {
 }
 
 const updateBot = (bot: Bot) => {
-  fetch('http://127.0.0.1:3000/user/bot/update/', {
+  fetch('https://app3920.acapp.acwing.com.cn/api/user/bot/update/', {
     method: 'POST',
     body: new URLSearchParams({
       bot_id: bot.id,
@@ -108,7 +108,7 @@ const updateBot = (bot: Bot) => {
 }
 
 const removeBot = (bot: Bot) => {
-  fetch('http://127.0.0.1:3000/user/bot/remove/', {
+  fetch('https://app3920.acapp.acwing.com.cn/api/user/bot/remove/', {
     method: 'POST',
     body: new URLSearchParams({
       bot_id: bot.id,

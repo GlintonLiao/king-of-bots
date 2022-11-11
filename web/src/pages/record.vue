@@ -73,7 +73,7 @@ function openRecordPage(id: number) {
 async function pullPage(page: number) {
   currentPage = page
   try {
-    const response = await fetch(`http://127.0.0.1:3000/record/getlist/?page=${page}`, {
+    const response = await fetch(`https://app3920.acapp.acwing.com.cn/api/record/getlist/?page=${page}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${user.token}`,

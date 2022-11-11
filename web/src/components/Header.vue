@@ -21,7 +21,13 @@ const show = () => {
 
 <template>
   <nav class="text-md mb-5 flex justify-around color-bluegray">
-    <div class="">
+    <div>
+      <button class="px-5">
+        <RouterLink to="/">
+          <div i-mdi-gamepad />
+          KING OF BOTS
+        </RouterLink>
+      </button>
       <button class="px-5" :class="route.name === 'pk' ? 'text-gray-700' : ''">
         <RouterLink to="/pk/">
           Battle
