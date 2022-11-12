@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
-
+const { t } = useI18n()
 const user = useUserStore()
 const route = useRoute()
 const isShow = ref(true)
@@ -21,26 +20,27 @@ const show = () => {
 
 <template>
   <nav class="text-md mb-5 flex justify-around color-bluegray">
+    <button class="flex items-center mr--10">
+      <div i-carbon-scatter-matrix />
+      &nbsp;
+      <RouterLink to="/" font-bold>
+        KING OF BOTS
+      </RouterLink>
+    </button>
     <div>
-      <button class="px-5">
-        <RouterLink to="/">
-          <div i-mdi-gamepad />
-          KING OF BOTS
-        </RouterLink>
-      </button>
       <button class="px-5" :class="route.name === 'pk' ? 'text-gray-700' : ''">
         <RouterLink to="/pk/">
-          Battle
+          {{ t('header.battle') }}
         </RouterLink>
       </button>
       <button class="px-5" :class="route.name === 'record' ? 'text-gray-700' : ''">
         <RouterLink to="/record/">
-          Game Records
+          {{ t('header.game-record') }}
         </RouterLink>
       </button>
       <button class="px-5" :class="route.name === 'ranklist' ? 'text-gray-700' : ''">
         <RouterLink to="/ranklist/">
-          Rankings
+          {{ t('header.rankings') }}
         </RouterLink>
       </button>
     </div>
@@ -64,7 +64,7 @@ const show = () => {
       <RouterLink p-x-3 to="/account/login">
         Login
       </RouterLink>
-      <RouterLink to="/account/login">
+      <RouterLink to="/account/register">
         Register
       </RouterLink>
     </div>

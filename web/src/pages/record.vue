@@ -25,7 +25,7 @@ const updatePage = () => {
   pages.value = newPages
 }
 
-const clickPage = (page) => {
+const clickPage = (page: number) => {
   if (page === -2) page = currentPage - 1
   else if (page === -1) page = currentPage + 1
   const maxPages = Math.floor(Math.ceil(totalRecords / 10))

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-console.log("asd");
-
 </script>
 
 <template>

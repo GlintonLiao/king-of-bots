@@ -6,7 +6,7 @@ const socketUrl = `wss://app3920.acapp.acwing.com.cn/websocket/${user.token}/`
 
 onMounted(() => {
   pk.opponentUsername = 'My Opponent'
-  pk.opponentPhoto = 'https://cdn.acwing.com/media/article/image/2022/08/09/1_1db2488f17-anonymous.png'
+  pk.opponentPhoto = '../../public/anonymous.png'
 
   pk.loser = 'none'
   re.isRecording = false

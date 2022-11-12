@@ -3,15 +3,11 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-
-    <div flex>
+  <div mt-10>
+    <div>
       <div>
-        <a text-8xl font-700 rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-          King of Bots
+        <a text-6xl font-black rel="noreferrer" href="https://github.com/glintonliao/king-of-bots" target="_blank">
+          KING OF BOTS
         </a>
       </div>
       <p>
@@ -19,28 +15,28 @@ const { t } = useI18n()
       </p>
     </div>
 
-    <div py-4 />
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+    <div py-3 />
+    <div max-w-100 mx-auto mb--25 z-0>
+      <img src="/public/pk_light.jpg" alt="">
+    </div>
 
-    <div>
+    <button z-10>
       <RouterLink
-        btn m-3 text-sm
+        btn m-3 text-lg
         to="/pk/"
       >
         {{ t('button.go') }}
       </RouterLink>
-    </div>
-
-    <div>
-      <RouterLink
-        btn m-3 text-sm
-        to="/user/bot/"
-      >
-        {{ t('button.go') }}
-      </RouterLink>
-    </div>
+    </button>
   </div>
 </template>
+
+<style scoped>
+img {
+  mask-image: linear-gradient(0, transparent 13%, #fff);
+  -webkit-mask-image: linear-gradient(0, transparent 13%, #fff);
+}
+</style>
 
 <route lang="yaml">
 meta:

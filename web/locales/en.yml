@@ -1,27 +1,31 @@
 button:
   about: About
   back: Back
-  go: GO
+  go: Start Playing
   home: Home
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
+header:
+  rankings: Rankings
+  game-record: Game Records
+  battle: Battle
 intro:
-  desc: Opinionated Vite Starter Template
+  aka: Also known as
+  desc: Ai Battle Platform
   dynamic-route: Demo of dynamic route
   hi: Hi, {name}!
-  aka: Also known as
   whats-your-name: What's your name?
-not-found: Not found
 login:
+  login-button: Login
+  password-holder: Please enter password
   title: User Login
   username-holder: Please enter username
-  password-holder: Please enter password
-  login-button: Login
+not-found: Not found
 register:
+  confirmed-password-holder: Please confirm password
+  password-holder: Please enter password
+  register-button: Register
   title: Register
   username-holder: Please enter username
-  password-holder: Please enter password
-  confirmed-password-holder: Please confirm password
-  register-button: Register
 user:
   title: Bots List
