@@ -34,5 +34,8 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
+  rules: [
+    ['text-md', { 'font-size': '1.05rem', 'line-height': '1.5rem' }],
+  ],
   safelist: 'prose prose-sm m-auto text-left'.split(' '),
 })
