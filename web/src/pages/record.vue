@@ -93,7 +93,7 @@ pullPage(currentPage)
 </script>
 
 <template>
-  <div max-w-3xl mx-auto>
+  <div max-w-4xl mx-auto>
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg mb-10 mt-8">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -183,5 +183,5 @@ pullPage(currentPage)
 
 <route lang="yaml">
 meta:
-  layout: user
+  layout: record
 </route>

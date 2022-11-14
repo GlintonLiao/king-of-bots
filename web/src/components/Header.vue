@@ -20,7 +20,7 @@ const show = () => {
 
 <template>
   <nav class="text-md mb-5 flex justify-around color-bluegray">
-    <button class="flex items-center mr--10">
+    <button class="flex items-center mr--15">
       <div i-carbon-scatter-matrix />
       &nbsp;
       <RouterLink to="/" font-bold>
