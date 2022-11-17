@@ -1,4 +1,3 @@
-/* eslint-disable antfu/if-newline */
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { Cell, DX, DY, GameMap, GameObject } from '../gameplay'
 

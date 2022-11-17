@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { Cell, DX, DY, GameObject, Snake, Wall } from '../gameplay'
+import { Cell, GameObject, Snake, Wall } from '../gameplay'
 
 export class GameMap extends GameObject {
   // attributes
