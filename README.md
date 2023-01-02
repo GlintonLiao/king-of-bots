@@ -168,11 +168,31 @@ async function pullPage(page: number) {
 
 #### User Account
 
+If you want to play the game, you need to first register an account.
+
+The project use jwt token to encrypt users' password, and will store the token in the local storage of users' browser. The duration of the token is 14 days, so users will need to enter their password again after 14 days since last login.
+
 #### User Bots
+
+Users can upload code blocks and play the game using the code(bots).
+
+When creating the bot code, users will need to follow the code structure provided, and return 0 to 4, representing the next direction of move.
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/37015336/210188924-0557616b-1dd1-4c03-8aaa-3c1e6133649c.jpg" style="width: 600px" />
+</div>
 
 ## Matching System MicroService
 
+The project supports matching system using a `matchpool`, which is an queue running on another thread, and sends back the matching results through `RestTemplate`.
+
+While matching, the matching system will match users with the same ratings, and will increase the allowance as time goes by(10 points per second).
+
+For example, if user A has 1500 points, user B ha 1600 points, they will be matched after 10 seconds(if there are only two users in the queue).
+
 ## Bot Running System MicroService
+
+The project supports running user-defined code blocks, and this feature is an independent micro service as well.
 
 ## Run on Your Local Machine
 
