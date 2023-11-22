@@ -1,0 +1,31 @@
+button:
+  about: About
+  back: Back
+  go: Start Playing
+  home: Home
+  toggle_dark: Toggle dark mode
+  toggle_langs: Change languages
+header:
+  rankings: Rankings
+  game-record: Game Records
+  battle: Battle
+intro:
+  aka: Also known as
+  desc: Ai Battle Platform
+  dynamic-route: Demo of dynamic route
+  hi: Hi, {name}!
+  whats-your-name: What's your name?
+login:
+  login-button: Login
+  password-holder: Please enter password
+  title: User Login
+  username-holder: Please enter username
+not-found: Not found
+register:
+  confirmed-password-holder: Please confirm password
+  password-holder: Please enter password
+  register-button: Register
+  title: Register
+  username-holder: Please enter username
+user:
+  title: Bots List

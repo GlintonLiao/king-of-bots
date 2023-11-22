@@ -1,0 +1,24 @@
+button:
+  about: 关于
+  back: 返回
+  go: 开始游戏
+  home: 首页
+  toggle_dark: 切换深色模式
+  toggle_langs: 切换语言
+header:
+  rankings: 排名
+  game-record: 对局记录
+  battle: 对战
+intro:
+  aka: 也叫
+  desc: Ai 对战平台
+  dynamic-route: 动态路由演示
+  hi: 你好，{name}
+  whats-your-name: 输入你的名字
+login:
+  login-button: 登录
+  password-holder: 请输入密码
+  register-button: 注册
+  title: 用户登录
+  username-holder: 请输入用户名
+not-found: 未找到页面
